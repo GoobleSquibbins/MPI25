@@ -5,6 +5,8 @@ use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\FineController;
 use App\Http\Controllers\GeneralUSeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login');
@@ -29,7 +31,7 @@ Route::prefix('books')
 
 Route::prefix('staffs')
     ->name('staffs.')
-    ->controller(BookController::class)
+    ->controller(StaffController::class)
     ->group(function () {
 
         Route::get('/', 'index')->name('index');
@@ -42,7 +44,7 @@ Route::prefix('staffs')
 
 Route::prefix('members')
     ->name('members.')
-    ->controller(BookController::class)
+    ->controller(MemberController::class)
     ->group(function () {
 
         Route::get('/', 'index')->name('index');

@@ -47,9 +47,12 @@
 
         {{-- Members --}}
         <li>
-            <a href="#" class="flex items-center gap-[10px] px-[20px] py-[15px] hover:bg-gray-200">
+            <a href="{{ route('members.index') }}" class="flex items-center gap-[10px] px-[20px] py-[15px] hover:bg-gray-200">
 
-                <div class="w-[5px] h-[15px] bg-gray-300"></div>
+                <div
+                    class="w-[5px] h-[15px]
+                    {{ request()->routeIs('members.index') ? 'bg-green-500' : 'bg-gray-300' }}">
+                </div>
 
                 <span class="text-[17px] font-medium">Members</span>
             </a>
@@ -57,7 +60,7 @@
 
         {{-- Staffs --}}
         <li>
-            <a href="#" class="flex items-center gap-[10px] px-[20px] py-[15px] hover:bg-gray-200">
+            <a href="{{ route('staffs.index') }}" class="flex items-center gap-[10px] px-[20px] py-[15px] hover:bg-gray-200">
 
                 <div class="w-[5px] h-[15px] bg-gray-300"></div>
 
