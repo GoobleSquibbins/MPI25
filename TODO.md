@@ -1,6 +1,5 @@
-# TODO: Create Member Page
+# TODO: Create Book Page Implementation
 
-- [x] Create MemberController with index method
-- [x] Update routes/web.php to use MemberController
-- [x] Update member.blade.php view to display members table
-- [x] Update sidebar.blade.php to link Members menu item
+- [x] Update BookController create method to pass publishers, authors, genres to view
+- [x] Update resources/views/books/create.blade.php with form for book creation
+- [x] Implement BookController store method to handle form submission and create book with relationships
