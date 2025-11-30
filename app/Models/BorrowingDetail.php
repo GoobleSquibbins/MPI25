@@ -12,9 +12,9 @@ class BorrowingDetail extends Model
         'qty'
     ];
 
-    public function borrowings()
+    public function borrowing()
     {
-        return $this->belongsTo(Borrowing::class);
+        return $this->belongsTo(Borrowing::class, 'borrow_id');
     }
 
     public function book()

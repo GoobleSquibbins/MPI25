@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 
 class StaffController extends Controller
 {
-    public function index(){
-        $staffs = Staff::all();
-        return view('staffs.staffs')->with('staff_data', $staffs);
+    public function index()
+    {
+        $staffs = Staff::with('role')
+            ->where('name', '!=', 'admin')
+            ->get();
+
+        return view('staff.staff', ['staff_data' => $staffs]);
     }
 }

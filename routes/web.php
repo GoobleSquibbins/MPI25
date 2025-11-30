@@ -5,8 +5,8 @@ use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\FineController;
 use App\Http\Controllers\GeneralUSeController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MemberController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login');

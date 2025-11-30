@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $members = Member::all();
 
-        return view('members.members', ['member_data' => $members]);
+        return view('member', ['member_data' => $members]);
     }
 }

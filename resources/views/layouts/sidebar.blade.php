@@ -29,12 +29,33 @@
         </div>
     </div>
 
-    <ul class="flex-grow space-y-[2px]">
-        <x-yorha-link route="borrowings.index" label="Borrowings" />
-        <x-yorha-link route="books.index" label="Books" />
-        <x-yorha-link route="fines.index" label="Fines" />
-        <x-yorha-link route="members.index" label="Members" />
-        <x-yorha-link route="staffs.index" label="Staffs" />
+                <span class="text-[17px] font-medium">Fines</span>
+            </a>
+        </li>
+
+        {{-- Members --}}
+        <li>
+            <a href="{{ route('members.index') }}" class="flex items-center gap-[10px] px-[20px] py-[15px] hover:bg-gray-200">
+
+                <div
+                    class="w-[5px] h-[15px]
+                    {{ request()->routeIs('members.index') ? 'bg-green-500' : 'bg-gray-300' }}">
+                </div>
+
+                <span class="text-[17px] font-medium">Members</span>
+            </a>
+        </li>
+
+        {{-- Staffs --}}
+        <li>
+            <a href="{{ route('staffs.index') }}" class="flex items-center gap-[10px] px-[20px] py-[15px] hover:bg-gray-200">
+
+                <div class="w-[5px] h-[15px] bg-gray-300"></div>
+
+                <span class="text-[17px] font-medium">Staffs</span>
+            </a>
+        </li>
+
     </ul>
 
     {{-- YoRHa Logout --}}
