@@ -15,8 +15,8 @@ class Member extends Model
         'email'
     ];
 
-    public function books()
+    public function borrow()
     {
-        return $this->hasMany(Book::class);
+        return $this->hasMany(Borrowing::class);
     }
 }

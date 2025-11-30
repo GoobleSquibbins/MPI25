@@ -21,42 +21,66 @@
         </div>
 
         <!-- Table Container -->
-        <div class="w-full bg-black/40 backdrop-blur-sm border border-gray-700 p-6 rounded-lg">
+        <div class="w-full bg-black/40 backdrop-blur-sm border border-gray-700 p-6 rounded-lg scanlines">
 
-            <table class="table-auto w-full border-collapse text-sm">
+            <table class="w-full border-collapse text-sm table-fixed">
                 <thead class="border-b border-gray-700 text-gray-300 uppercase tracking-widest text-xs">
-                    <tr>
-                        <th class="py-3 text-left">Title</th>
-                        <th class="py-3 text-left">Genres</th>
-                        <th class="py-3 text-left">Authors</th>
-                        <th class="py-3 text-left">Publisher</th>
+                    <tr class="">
+                        <th class="py-3 text-left w-1/5">Title</th>
+                        <th class="py-3 text-left w-1/5">Genres</th>
+                        <th class="py-3 text-left w-1/5">Authors</th>
                         <th class="py-3 text-left">Year</th>
                         <th class="py-3 text-left">Copies</th>
-                        <th class="py-3 text-left">Action</th>
+                        <th class="py-3 text-left ">Action</th>
                     </tr>
                 </thead>
 
                 <tbody class="divide-y divide-gray-800">
                     @foreach ($book_data as $book)
-                        <tr class="hover:bg-white/5 transition">
-                            <td class="py-3">{{ $book->name }}</td>
-                            <td class="py-3">{{ $book->genres->pluck('name')->join(', ') }}</td>
-                            <td class="py-3">{{ $book->authors->pluck('name')->join(', ') }}</td>
-                            <td class="py-3">{{ $book->publisher->name }}</td>
-                            <td class="py-3">{{ $book->year }}</td>
-                            <td class="py-3">{{ $book->available_copies }}</td>
+                        <tr class="hover:bg-white/5 transition duration-200">
+
+                            <!-- Title (truncate if too long) -->
+                            <td class="py-3 pr-4 max-w-[180px] truncate text-gray-200">
+                                {{ $book->name }}
+                            </td>
+
+                            <!-- Genres -->
+                            <td class="py-3 pr-4 max-w-[140px] truncate text-gray-300">
+                                {{ $book->genres->pluck('name')->join(', ') }}
+                            </td>
+
+                            <!-- Authors -->
+                            <td class="py-3 pr-4 max-w-[140px] truncate text-gray-300">
+                                {{ $book->authors->pluck('name')->join(', ') }}
+                            </td>
+
+                            <!-- Year -->
+                            <td class="py-3 text-gray-400">
+                                {{ $book->year }}
+                            </td>
+
+                            <!-- Copies -->
+                            <td class="py-3 text-gray-300 font-semibold">
+                                {{ $book->available_copies }}
+                            </td>
+
+                            <!-- Action -->
                             <td class="py-3">
-                                <a href="#" class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                                <a href="#" class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
+                                <a href="#"
+                                    class="text-blue-400 hover:text-blue-300 hover:underline underline-offset-4 transition">Edit</a>
+                                <a href="#"
+                                    class="ml-4 text-red-400 hover:text-red-300 hover:underline underline-offset-4 transition">Delete</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
-
             </table>
+
         </div>
+
 
     </div>
 
 </body>
+
 </html>
