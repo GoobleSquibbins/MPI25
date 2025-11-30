@@ -46,8 +46,19 @@
                             <td class="py-3">{{ $book->year }}</td>
                             <td class="py-3">{{ $book->available_copies }}</td>
                             <td class="py-3">
-                                <a href="#" class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                                <a href="#" class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
+                                <a href="{{ route('books.edit', $book->id) }}" 
+                                class="text-blue-400 hover:text-blue-300 transition">Edit</a>
+
+                                <form action="{{ route('books.destroy', $book->id) }}" 
+                                    method="POST" 
+                                    class="inline ml-3">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="text-red-400 hover:text-red-300 transition"
+                                        onclick="return confirm('Delete this book?')">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

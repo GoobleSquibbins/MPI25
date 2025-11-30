@@ -58,8 +58,17 @@
                             </td>
 
                             <td class="py-3">
-                                <a href="#" class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                                <a href="#" class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
+                                <a href="{{ route('borrowings.edit', $bd->id) }}" class="text-blue-400 hover:text-blue-300 transition">
+                                    Edit
+                                </a>
+
+                                <form action="{{ route('borrowings.destroy', $bd->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="text-red-400 hover:text-red-300 transition"
+                                            onclick="return confirm('Delete this record?')">Delete</button>
+                                </form>
+
                             </td>
                         </tr>
                     @endforeach

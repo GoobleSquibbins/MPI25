@@ -44,28 +44,26 @@ class BookController extends Controller
             'new_genres' => 'nullable|string',
         ]);
 
-        // Collect author IDs from selected and new
+        // Collect author IDs
         $authorIds = $request->authors ?? [];
 
         if ($request->new_authors) {
             $newAuthorNames = array_map('trim', explode(',', $request->new_authors));
             foreach ($newAuthorNames as $name) {
                 if (!empty($name)) {
-                    $author = Author::firstOrCreate(['name' => $name]);
-                    $authorIds[] = $author->id;
+                    $authorIds[] = Author::firstOrCreate(['name' => $name])->id;
                 }
             }
         }
 
-        // Collect genre IDs from selected and new
+        // Collect genre IDs
         $genreIds = $request->genres ?? [];
-
+        
         if ($request->new_genres) {
             $newGenreNames = array_map('trim', explode(',', $request->new_genres));
             foreach ($newGenreNames as $name) {
                 if (!empty($name)) {
-                    $genre = Genre::firstOrCreate(['name' => $name]);
-                    $genreIds[] = $genre->id;
+                    $genreIds[] = Genre::firstOrCreate(['name' => $name])->id;
                 }
             }
         }
@@ -90,5 +88,94 @@ class BookController extends Controller
         $book->genres()->attach($genreIds);
 
         return redirect()->route('books.index')->with('success', 'Book created successfully!');
+    }
+
+    public function edit($id)
+    {
+        $book = Book::with(['authors', 'genres'])->findOrFail($id);
+
+        $publishers = Publisher::all();
+        $authors = Author::all();
+        $genres = Genre::all();
+
+        return view('books.edit', compact('book', 'publishers', 'authors', 'genres'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'publisher_id' => 'required|exists:publishers,id',
+            'year' => 'required|integer|min:1000|max:' . date('Y'),
+            'total_copies' => 'required|integer|min:1',
+            'available_copies' => 'required|integer|min:0|lte:total_copies',
+
+            'authors' => 'nullable|array',
+            'authors.*' => 'exists:authors,id',
+            'new_authors' => 'nullable|string',
+
+            'genres' => 'nullable|array',
+            'genres.*' => 'exists:genres,id',
+            'new_genres' => 'nullable|string',
+        ]);
+
+        $book = Book::findOrFail($id);
+
+        // Collect author IDs
+        $authorIds = $request->authors ?? [];
+        if ($request->new_authors) {
+            $newAuthorNames = array_map('trim', explode(',', $request->new_authors));
+            foreach ($newAuthorNames as $name) {
+                if (!empty($name)) {
+                    $authorIds[] = Author::firstOrCreate(['name' => $name])->id;
+                }
+            }
+        }
+
+        // Collect genre IDs
+        $genreIds = $request->genres ?? [];
+        if ($request->new_genres) {
+            $newGenreNames = array_map('trim', explode(',', $request->new_genres));
+            foreach ($newGenreNames as $name) {
+                if (!empty($name)) {
+                    $genreIds[] = Genre::firstOrCreate(['name' => $name])->id;
+                }
+            }
+        }
+
+        if (empty($authorIds)) {
+            return back()->withErrors(['authors' => 'At least one author is required.']);
+        }
+        if (empty($genreIds)) {
+            return back()->withErrors(['genres' => 'At least one genre is required.']);
+        }
+
+        // Update book
+        $book->update([
+            'name' => $request->name,
+            'publisher_id' => $request->publisher_id,
+            'year' => $request->year,
+            'total_copies' => $request->total_copies,
+            'available_copies' => $request->available_copies,
+        ]);
+
+        // Sync relationships
+        $book->authors()->sync($authorIds);
+        $book->genres()->sync($genreIds);
+
+        return redirect()->route('books.index')->with('success', 'Book updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $book = Book::findOrFail($id);
+
+        // Remove pivot relationships
+        $book->authors()->detach();
+        $book->genres()->detach();
+
+        $book->delete();
+
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully!');
     }
 }

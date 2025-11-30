@@ -26,7 +26,7 @@ Route::prefix('books')
         Route::post('/store', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}', 'update')->name('update');
-        Route::delete('/{id}', 'destroy')->name('delete');
+        Route::delete('/{id}', 'destroy')->name('destroy');
     });
 
 Route::prefix('staffs')
@@ -65,7 +65,7 @@ Route::prefix('borrowings')
         Route::post('/store', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}', 'update')->name('update');
-        Route::delete('/{id}', 'destroy')->name('delete');
+        Route::delete('/{id}', 'destroy')->name('destroy');
     });
 
     
