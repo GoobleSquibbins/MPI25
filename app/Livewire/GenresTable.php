@@ -2,11 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Models\Genre;
 use App\Models\Member;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class MembersTable extends Component
+class GenresTable extends Component
 {
     use WithPagination;
 
@@ -20,14 +21,12 @@ class MembersTable extends Component
 
     public function render()
     {
-        $members = Member::query()
+        $genres = Genre::query()
             ->where('name', 'like', "%{$this->search}%")
-            ->orWhere('email', 'like', "%{$this->search}%")
-            ->orWhere('phone', 'like', "%{$this->search}%")
             ->paginate(10);
 
-        return view('livewire.members.members-table', [
-            'members' => $members,
+        return view('livewire.genres.genres-table', [
+            'genres_data' => $genres,
         ]);
     }
 }

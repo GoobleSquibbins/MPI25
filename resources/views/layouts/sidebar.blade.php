@@ -32,6 +32,9 @@
     <ul class="flex-grow space-y-[2px]">
         <x-yorha-link route="borrowings.index" label="Borrowings" />
         <x-yorha-link route="books.index" label="Books" />
+        <x-yorha-link route="genres.index" label="Genres" />
+        <x-yorha-link route="publishers.index" label="Publishers" />
+        <x-yorha-link route="authors.index" label="Author" />
         <x-yorha-link route="fines.index" label="Fines" />
         <x-yorha-link route="members.index" label="Members" />
         <x-yorha-link route="staffs.index" label="Staffs" />

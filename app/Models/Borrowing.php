@@ -12,7 +12,7 @@ class Borrowing extends Model
         'borrow_date',
         'due_date',
         'return_date',
-        'status'
+        'status',
     ];
 
     public function member()
@@ -23,5 +23,10 @@ class Borrowing extends Model
     public function staff()
     {
         return $this->belongsTo(Staff::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(BorrowingDetail::class, 'borrow_id', 'id');
     }
 }

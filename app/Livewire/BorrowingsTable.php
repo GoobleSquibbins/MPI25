@@ -13,7 +13,7 @@ class BorrowingsTable extends Component
     public $search = '';
 
     // Main sort selector
-    public $sort = 'borrow_date_asc';
+    public $sort = 'borrow_date_desc';
 
     // Keep these in URL
     protected $updatesQueryString = ['search', 'sort'];
@@ -39,8 +39,7 @@ class BorrowingsTable extends Component
 
             // Search by member or item
             ->when($this->search, function ($q) {
-                $q->where('members.name', 'like', '%'.$this->search.'%')
-                    ->orWhere('borrowings.item_name', 'like', '%'.$this->search.'%');
+                $q->where('members.name', 'like', '%'.$this->search.'%');
             });
 
         // -------------------------------
@@ -83,7 +82,7 @@ class BorrowingsTable extends Component
         // Final pagination
         $borrowing_data = $query->paginate(10);
 
-        return view('livewire.borrowings-table', [
+        return view('livewire.borrowings.borrowings-table', [
             'borrowing_data' => $borrowing_data,
         ]);
     }

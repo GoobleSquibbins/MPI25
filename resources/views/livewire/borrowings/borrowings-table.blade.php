@@ -2,12 +2,12 @@
 
     <div class="mb-6">
         <a href="{{ route('borrowings.create') }}"
-            class="inline-block
+            class="inline-block w-[350px] text-center
                bg-white hover:bg-blue-600
                border border-black
                text-black font-semibold
                hover:text-white text-[16px]
-               px-[30px] py-3
+               px-[30px] py-[7px]
                tracking-widest uppercase text-xs
                transition
                shadow-md hover:shadow-lg">
@@ -22,7 +22,7 @@
         <!-- Search Box -->
         <div class="relative">
             <input wire:model.live.debounce.300ms="search" type="text" placeholder="SEARCH MEMBER..."
-                class="px-4 py-2 w-72
+                class="px-4 py-2 w-[350px]
                        bg-black/40 border border-gray-700 text-gray-200
                        tracking-widest uppercase text-xs
                        focus:outline-none focus:border-white transition-all
@@ -47,10 +47,10 @@
                focus:outline-none focus:border-white
                transition-all w-48">
 
-                <option value="borrow_date_asc">Borrow Date ↑</option>
                 <option value="borrow_date_desc">Borrow Date ↓</option>
-                <option value="due_date_asc">Due Date ↑</option>
+                <option value="borrow_date_asc">Borrow Date ↑</option>
                 <option value="due_date_desc">Due Date ↓</option>
+                <option value="due_date_asc">Due Date ↑</option>
                 <option value="returned">Returned</option>
                 <option value="borrowed">Borrowed</option>
                 <option value="overdue">Overdue</option>
@@ -73,14 +73,14 @@
         <table class="table-auto w-full border-collapse text-sm">
             <thead class="border-b border-gray-700 text-gray-300 uppercase tracking-widest text-xs">
                 <tr>
-                    <th wire:click="sortBy('member_id')" class="py-3 text-left cursor-pointer hover:text-blue-400">
+                    <th class="py-3 text-left">
                         Member
                     </th>
-                    <th wire:click="sortBy('staff_id')" class="py-3 text-left cursor-pointer hover:text-blue-400">Staff
+                    <th class="py-3 text-left">Staff
                     </th>
-                    <th wire:click="sortBy('borrow_date')" class="py-3 text-left cursor-pointer hover:text-blue-400">
+                    <th class="py-3 text-left">
                         Borrow Date</th>
-                    <th wire:click="sortBy('due_date')" class="py-3 text-left cursor-pointer hover:text-blue-400">Due
+                    <th class="py-3 text-left">Due
                         Date</th>
                     <th class="py-3 text-left">Status</th>
                     <th class="py-3 text-left">Action</th>
@@ -109,8 +109,13 @@
                         </td>
 
                         <td class="py-3">
-                            <a href="#" class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                            <a href="#" class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
+                            <a href="{{ route('borrowings.edit', $bd->id) }}"
+                                class="text-blue-400 hover:text-blue-300 transition">Edit</a>
+                            <a href="{{ route('borrowings.delete', $bd->id) }}"
+                                class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
+                            @if ($bd->status != 'returned')
+                                <a href="#" class="ml-3 text-green-400 hover:text-green-300 transition">Return</a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

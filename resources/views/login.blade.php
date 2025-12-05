@@ -12,7 +12,7 @@
 
     <div class="w-full max-w-sm border border-gray-600 p-8 bg-black bg-opacity-80 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
 
-        <h1 class="text-center text-[16px] mb-6 tracking-widest">YoRHa ARCHIVE ACCESS TERMINAL</h1>
+        <h1 class="text-center text-[16px] mb-6 tracking-widest">LIBRARY MANAGEMENT SYSTEM</h1>
 
         @if ($errors->any())
         <div class="mb-4 border border-red-500 text-red-400 p-3 text-sm">
