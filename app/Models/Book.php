@@ -11,17 +11,27 @@ class Book extends Model
         'publisher_id',
         'year',
         'total_copies',
-        'available_copies'
+        'available_copies',
     ];
 
     public function authors()
     {
-        return $this->belongsToMany(Author::class, 'book_authors');
+        return $this->belongsToMany(
+            Author::class,
+            'book_authors',
+            'book_id',
+            'author_id'
+        );
     }
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'book_genres');
+        return $this->belongsToMany(
+            Genre::class,
+            'book_genres',
+            'book_id',
+            'genre_id'
+        );
     }
 
     public function publisher()

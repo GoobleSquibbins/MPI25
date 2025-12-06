@@ -47,7 +47,7 @@ class BookTable extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);
 
-        return view('livewire.book-table', [
+        return view('livewire.books.book-table', [
             'books' => $books,
         ]);
     }

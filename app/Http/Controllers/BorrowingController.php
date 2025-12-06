@@ -103,8 +103,6 @@ class BorrowingController extends Controller
                 'book_id' => $bookId,
                 'qty' => 1,
             ]);
-
-            Book::find($bookId)->decrement('available_copies');
         }
 
         return redirect()->route('borrowings.index')

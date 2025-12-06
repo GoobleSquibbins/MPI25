@@ -38,7 +38,7 @@
 
 
     <!-- Table Container -->
-    <div class="w-full bg-black/40 backdrop-blur-sm border border-gray-700 p-6">
+    <div class="w-full bg-black/40 backdrop-blur-sm border border-gray-700 p-6  ">
 
         <table class="table-auto w-full border-collapse text-sm">
             <thead class="border-b border-gray-700 text-gray-300 uppercase tracking-widest text-xs">

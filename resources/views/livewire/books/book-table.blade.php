@@ -87,13 +87,10 @@
 
                         <!-- Actions -->
                         <td class="py-3">
-                            <a href="#"
-                                class="text-blue-400 hover:text-blue-300 hover:underline underline-offset-4 transition">Edit</a>
-
-                            <a href="#"
-                                class="ml-4 text-red-400 hover:text-red-300 hover:underline underline-offset-4 transition">
-                                Delete
-                            </a>
+                            <a href="{{ route('books.edit', $book->id) }}"
+                                class="text-blue-400 hover:text-blue-300 transition">Edit</a>
+                            <a href="{{ route('books.delete', $book->id) }}"
+                                class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
                         </td>
 
                     </tr>

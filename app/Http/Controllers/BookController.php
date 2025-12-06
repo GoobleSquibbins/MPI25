@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Publisher;
 use App\Models\Author;
+use App\Models\BookAuthor;
+use App\Models\BookGenre;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 
@@ -36,10 +38,10 @@ class BookController extends Controller
             'year' => 'required|integer|min:1000|max:' . date('Y'),
             'total_copies' => 'required|integer|min:1',
             'available_copies' => 'required|integer|min:0|lte:total_copies',
-            'authors' => 'nullable|array',
+            'authors' => 'required|array|min:1',
             'authors.*' => 'exists:authors,id',
             'new_authors' => 'nullable|string',
-            'genres' => 'nullable|array',
+            'genres' => 'required|array|min:1',
             'genres.*' => 'exists:genres,id',
             'new_genres' => 'nullable|string',
         ]);
@@ -90,5 +92,53 @@ class BookController extends Controller
         $book->genres()->attach($genreIds);
 
         return redirect()->route('books.index')->with('success', 'Book created successfully!');
+    }
+
+    public function edit($id)
+    {
+        $book = Book::find($id);
+
+        return view('books.edit', ['book' => $book]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $book = Book::FindOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'publisher_id' => 'required',
+            'year' => 'required|integer|min:1000|max:' . date('Y'),
+            'total_copies' => 'required|integer|min:1',
+            'available_copies' => 'required|integer|min:0|lte:total_copies',
+            'authors' => 'required|array|min:1',
+            'authors.*' => 'exists:authors,id',
+            'new_authors' => 'nullable|string',
+            'genres' => 'required|array|min:1',
+            'genres.*' => 'exists:genres,id',
+            'new_genres' => 'nullable|string',
+        ]);
+
+        $book->update($validated);
+
+        BookGenre::query()->where('book_id', $request->id)->delete();
+        BookAuthor::query()->where('book_id', $request->id)->delete();
+
+        foreach ($request->genres as $genreId) {
+            BookGenre::create([
+                'book_id' => $request->id,
+                'genre_id' => $genreId,
+            ]);
+        }
+
+        foreach ($request->authors as $authorId) {
+            BookAuthor::create([
+                'book_id' => $request->id,
+                'author_id' => $authorId,
+            ]);
+        }
+
+        return redirect()->route('books.index')
+            ->with('success', 'Book updated successfully.');
     }
 }
