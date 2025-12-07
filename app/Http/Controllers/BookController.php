@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Publisher;
 use App\Models\Author;
+use App\Models\Book;
 use App\Models\BookAuthor;
 use App\Models\BookGenre;
 use App\Models\Genre;
+use App\Models\Publisher;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -35,7 +35,7 @@ class BookController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'publisher_id' => 'required|exists:publishers,id',
-            'year' => 'required|integer|min:1000|max:' . date('Y'),
+            'year' => 'required|integer|min:1000|max:'.date('Y'),
             'total_copies' => 'required|integer|min:1',
             'available_copies' => 'required|integer|min:0|lte:total_copies',
             'authors' => 'required|array|min:1',
@@ -52,7 +52,7 @@ class BookController extends Controller
         if ($request->new_authors) {
             $newAuthorNames = array_map('trim', explode(',', $request->new_authors));
             foreach ($newAuthorNames as $name) {
-                if (!empty($name)) {
+                if (! empty($name)) {
                     $author = Author::firstOrCreate(['name' => $name]);
                     $authorIds[] = $author->id;
                 }
@@ -65,7 +65,7 @@ class BookController extends Controller
         if ($request->new_genres) {
             $newGenreNames = array_map('trim', explode(',', $request->new_genres));
             foreach ($newGenreNames as $name) {
-                if (!empty($name)) {
+                if (! empty($name)) {
                     $genre = Genre::firstOrCreate(['name' => $name]);
                     $genreIds[] = $genre->id;
                 }
@@ -108,7 +108,7 @@ class BookController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'publisher_id' => 'required',
-            'year' => 'required|integer|min:1000|max:' . date('Y'),
+            'year' => 'required|integer|min:1000|max:'.date('Y'),
             'total_copies' => 'required|integer|min:1',
             'available_copies' => 'required|integer|min:0|lte:total_copies',
             'authors' => 'required|array|min:1',
@@ -140,5 +140,16 @@ class BookController extends Controller
 
         return redirect()->route('books.index')
             ->with('success', 'Book updated successfully.');
+    }
+
+    
+
+    public function destroy(Request $request)
+    {
+        $item = Book::findOrFail($request->id);
+
+        $item->delete();
+
+        return redirect(route('books.index'))->with('success', 'Book Data Deleted');
     }
 }

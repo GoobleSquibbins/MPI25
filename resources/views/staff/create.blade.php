@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Member</title>
+    <title>New Staff</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -25,10 +25,9 @@
 
     <div class="flex-1 p-10">
 
-        <h1 class="text-4xl font-bold tracking-widest mb-8">New Member</h1>
+        <h1 class="text-4xl font-bold tracking-widest mb-8">New Staff</h1>
 
-        <form action="{{ route('members.store') }}" method="POST"
-            class="space-y-8 bg-black p-8  border border-gray-700">
+        <form action="{{ route('staffs.store') }}" method="POST" class="space-y-8 bg-black p-8  border border-gray-700">
             @csrf
             <div>
                 <label class="block mb-2 text-gray-300">Name</label>
@@ -37,26 +36,31 @@
                    focus:outline-none focus:border-white transition-all tracking-widest">
             </div>
             <div>
-                <label class="block mb-2 text-gray-300">Address</label>
-                <input type="text" name="address"
+                <label class="block mb-2 text-gray-300">Role</label>
+                <select name="role" id="role"
+                    class="px-3 py-2 bg-black border border-gray-700 text-gray-200 w-full
+           focus:outline-none focus:border-white transition-all tracking-widest">
+                    @foreach ($roles as $r)
+                        <option value="{{ $r->id }}">{{ $r->name }}</option>
+                    @endforeach
+                </select>
+
+            </div>
+            <div>
+                <label class="block mb-2 text-gray-300">Password</label>
+                <input type="text" name="password"
                     class="px-3 py-2 bg-black/60 border border-gray-700 text-gray-200 w-full
                    focus:outline-none focus:border-white transition-all tracking-widest">
             </div>
             <div>
-                <label class="block mb-2 text-gray-300">Phone</label>
-                <input type="text" name="phone"
-                    class="px-3 py-2 bg-black/60 border border-gray-700 text-gray-200 w-full
-                   focus:outline-none focus:border-white transition-all tracking-widest">
-            </div>
-            <div>
-                <label class="block mb-2 text-gray-300">E-mail</label>
-                <input type="text" name="email"
+                <label class="block mb-2 text-gray-300">Confirm Password</label>
+                <input type="text" name="password_conf"
                     class="px-3 py-2 bg-black/60 border border-gray-700 text-gray-200 w-full
                    focus:outline-none focus:border-white transition-all tracking-widest">
             </div>
             <div>
                 <div class="flex justify-end">
-                    <a href="{{ route('members.index') }}"
+                    <a href="{{ route('staffs.index') }}"
                         class="px-4 py-2 bg-gray-600 mr-4 hover:bg-gray-500 transition ease-in-out cursor-pointer">Cancel</a>
                     <button
                         class="px-4 py-2 bg-indigo-600 cursor-pointer hover:bg-indigo-500 transition ease-in-out">Create</button>

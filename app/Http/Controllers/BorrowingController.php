@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Borrowing;
 use App\Models\BorrowingDetail;
+use App\Models\Fine;
 use App\Models\Member;
 use App\Models\Staff;
 use Carbon\Carbon;
@@ -107,6 +108,45 @@ class BorrowingController extends Controller
 
         return redirect()->route('borrowings.index')
             ->with('success', 'Borrowing updated successfully.');
+    }
+
+    public function BookBack($id)
+    {
+        // Find borrowing
+        $borrowing = Borrowing::findOrFail($id);
+
+        // Return all books
+        $borrowingDetails = BorrowingDetail::where('borrow_id', $id)->get();
+
+        foreach ($borrowingDetails as $detail) {
+            $book = Book::find($detail->book_id);
+
+            if ($book) {
+                // Add back available copies
+                $book->available_copies += $detail->quantity;
+                $book->save();
+            }
+        }
+
+        // Update borrowing to returned
+        $borrowing->update([
+            'return_date' => now(),
+            'status' => 'returned',
+        ]);
+
+        // Check if late
+        $due = \Carbon\Carbon::parse($borrowing->due_date)->endOfDay();
+
+        if (now()->gt($due)) {
+            Fine::create([
+                'borrow_id' => $borrowing->id,
+                'amount' => 10000,
+                'status' => 'pending',
+            ]);
+        }
+
+        return redirect(route('borrowings.index'))
+            ->with('success', 'Book(s) Returned');
     }
 
     public function destroy(Request $request)

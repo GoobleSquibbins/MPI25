@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Member</title>
+    <title>Edit Member</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -25,34 +25,35 @@
 
     <div class="flex-1 p-10">
 
-        <h1 class="text-4xl font-bold tracking-widest mb-8">New Member</h1>
+        <h1 class="text-4xl font-bold tracking-widest mb-8">Edit Member</h1>
 
-        <form action="{{ route('members.store') }}" method="POST"
-            class="space-y-8 bg-black p-8  border border-gray-700">
+        <form action="{{ route('members.update', $member_data->id) }}" method="POST"
+            class="space-y-8 bg-black p-8 border border-gray-700">
             @csrf
+            @method('PUT')
             <div>
                 <label class="block mb-2 text-gray-300">Name</label>
                 <input type="text" name="name"
                     class="px-3 py-2 bg-black/60 border border-gray-700 text-gray-200 w-full
-                   focus:outline-none focus:border-white transition-all tracking-widest">
+                   focus:outline-none focus:border-white transition-all tracking-widest" value="{{ $member_data->name }}">
             </div>
             <div>
                 <label class="block mb-2 text-gray-300">Address</label>
                 <input type="text" name="address"
                     class="px-3 py-2 bg-black/60 border border-gray-700 text-gray-200 w-full
-                   focus:outline-none focus:border-white transition-all tracking-widest">
+                   focus:outline-none focus:border-white transition-all tracking-widest" value="{{ $member_data->address }}">
             </div>
             <div>
                 <label class="block mb-2 text-gray-300">Phone</label>
                 <input type="text" name="phone"
                     class="px-3 py-2 bg-black/60 border border-gray-700 text-gray-200 w-full
-                   focus:outline-none focus:border-white transition-all tracking-widest">
+                   focus:outline-none focus:border-white transition-all tracking-widest" value="{{ $member_data->phone }}">
             </div>
             <div>
                 <label class="block mb-2 text-gray-300">E-mail</label>
                 <input type="text" name="email"
                     class="px-3 py-2 bg-black/60 border border-gray-700 text-gray-200 w-full
-                   focus:outline-none focus:border-white transition-all tracking-widest">
+                   focus:outline-none focus:border-white transition-all tracking-widest" value="{{ $member_data->email }}">
             </div>
             <div>
                 <div class="flex justify-end">

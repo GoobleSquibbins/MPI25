@@ -29,7 +29,7 @@ Route::prefix('books')
         Route::post('/store', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}', 'update')->name('update');
-        Route::delete('/{id}', 'destroy')->name('delete');
+        Route::get('/{id}', 'destroy')->name('delete');
     });
 
 Route::prefix('staffs')
@@ -42,7 +42,7 @@ Route::prefix('staffs')
         Route::post('/store', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}', 'update')->name('update');
-        Route::delete('/{id}', 'destroy')->name('delete');
+        Route::get('/{id}', 'destroy')->name('delete');
     });
 
 Route::prefix('members')
@@ -72,6 +72,7 @@ Route::prefix('borrowings')
 
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}', 'update')->name('update');
+        Route::get('/{id}/back', 'BookBack')->name('bookBack');
         Route::get('/{id}', 'destroy')->name('delete');
     });
 
@@ -83,9 +84,9 @@ Route::prefix('fines')
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::get('/{id}/pay', 'pay')->name('pay');
         Route::put('/{id}', 'update')->name('update');
-        Route::delete('/{id}', 'destroy')->name('delete');
+        Route::get('/{id}', 'waive')->name('waive');
     });
 
 Route::prefix('genres')

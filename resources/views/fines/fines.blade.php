@@ -21,35 +21,7 @@
         </div>
 
         <!-- Table Container -->
-        <div class="w-full bg-black/40 backdrop-blur-sm border border-gray-700 p-6 rounded-lg scanlines">
-
-            <table class="table-auto w-full border-collapse text-sm">
-                <thead class="border-b border-gray-700 text-gray-300 uppercase tracking-widest text-xs">
-                    <tr>
-                        <th class="py-3 text-left">Borrower</th>
-                        <th class="py-3 text-left">Amount</th>
-                        <th class="py-3 text-left">Status</th>
-                        <th class="py-3 text-left">Action</th>
-                    </tr>
-                </thead>
-
-                <tbody class="divide-y divide-gray-800">
-                    @foreach ($fine_data as $fd)
-                        <tr class="hover:bg-white/5 transition">
-                            <td class="py-3">{{ $fd->borrow->member->name }}</td>
-                            <td class="py-3">Rp{{ $fd->amount }}</td>
-                            <td class="py-3">{{ $fd->status }}</td>
-
-                            <td class="py-3">
-                                <a href="#" class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                                <a href="#" class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-
-            </table>
-        </div>
+        @livewire('fine-table')
 
     </div>
 
