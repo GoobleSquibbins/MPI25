@@ -1,24 +1,16 @@
 <div class="relative w-full">
 
-    {{-- Search Box --}}
-    <input type="text"
-        wire:model.live.debounce.300ms="query"
-        placeholder="Search authors..."
-        name="author-search"
-        class="w-full px-3 py-2 bg-black border border-gray-700 text-gray-200 focus:outline-none focus:border-white transition ease-in-out">
-
     {{-- Dropdown --}}
-    @if (!empty($results))
-        <ul class="absolute bg-white text-black w-full mt-1 shadow-lg z-10">
-            @foreach ($results as $author)
-                <li wire:click="selectAuthor({{ $author->id }})"
-                    id="author-result-{{ $author->id }}"
-                    class="px-3 py-2 hover:bg-gray-200 cursor-pointer">
-                    {{ $author->name }}
-                </li>
-            @endforeach
-        </ul>
-    @endif
+    <select
+        name="author-select"
+        wire:change="selectAuthor($event.target.value)"
+        class="w-full px-3 py-2 bg-black border border-gray-700 text-gray-200 focus:outline-none focus:border-white transition ease-in-out"
+    >
+        <option value="">Select Author...</option>
+        @foreach(\App\Models\Author::all() as $author)
+            <option value="{{ $author->id }}">{{ $author->name }}</option>
+        @endforeach
+    </select>
 
     {{-- Selected Authors Chips --}}
     <div class="flex flex-wrap gap-2 mt-3">

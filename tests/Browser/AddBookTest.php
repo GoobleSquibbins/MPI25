@@ -32,9 +32,7 @@ test('Nambah Buku', function () {
         ->type('publisher-search', $publisher->name)
         ->waitForText($publisher->name) 
         ->click($publisher->name)
-        // ->type('author-search', $author->name)
-        // ->waitForText($author->name) 
-        // ->click('#author-result-{$author->id}')
+        ->select('author-select', $author->id)
         ->type('genre-search', $genre->name)
         ->waitForText($genre->name) 
         ->click($genre->name);
