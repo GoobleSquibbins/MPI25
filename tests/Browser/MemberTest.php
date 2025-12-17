@@ -1,57 +1,60 @@
 <?php
 
 use Database\Seeders\DatabaseSeeder;
-use App\Models\Genre;
+use App\Models\Member;
 
 beforeEach(function () {
     $this->seed(DatabaseSeeder::class);
 });
 
-test('Tambah Genre', function () {  
+test('Tambah Member', function () {  
     $this->visit('/')
         ->resize(1280, 720)
         ->assertSee('LIBRARY MANAGEMENT SYSTEM')
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
+        ->navigate('/members')
         ->click('create')
-        ->type('name', 'Genre Baru')
+        ->type('name', 'Member Baru')
+        ->type('address', 'Alamat')
+        ->type('phone', '1234567890')
+        ->type('email', 'email@gmail.com')
         ->click('submit')
-        ->assertSee('Genre Baru');
+        ->assertSee('Member Baru');
 });
 
-test('Hapus Genre', function () {
-    $genre = Genre::first();  
+test('Hapus Member', function () {
+    $member = Member::first();  
     $this->visit('/')
         ->resize(1280, 720)
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
-        ->assertSee($genre->name)
+        ->navigate('/members')
+        ->assertSee($member->name)
         
         // Gunakan kutip ganda dan selector [name]
-        ->click("[name='delete{$genre->id}']") 
+        ->click("[name='delete{$member->id}']") 
         
         // Tambahkan asersi untuk memastikan data hilang
-        ->assertDontSee($genre->name);
+        ->assertDontSee($member->name);
 });
 
-test('Edit Genre', function () {
-    $genre = Genre::first();  
+test('Edit Member', function () {
+    $member = Member::first();  
     $this->visit('/')
         ->resize(1280, 720)
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
-        ->assertSee($genre->name)
+        ->navigate('/members')
+        ->assertSee($member->name)
         
         // Gunakan kutip ganda dan selector [name]
-        ->click("[name='edit{$genre->id}']") 
+        ->click("[name='edit{$member->id}']") 
         ->type('name', '')
-        ->type('name', 'Genre Baru')
+        ->type('name', 'Member Baru')
         ->submit()
-        ->assertSee('Genre Baru');
+        ->assertSee('Member Baru');
 });

@@ -62,7 +62,7 @@
                 <div class="flex justify-end">
                     <a href="{{ route('staffs.index') }}"
                         class="px-4 py-2 bg-gray-600 mr-4 hover:bg-gray-500 transition ease-in-out cursor-pointer">Cancel</a>
-                    <button
+                    <button name="submit" type= "submit"
                         class="px-4 py-2 bg-indigo-600 cursor-pointer hover:bg-indigo-500 transition ease-in-out">Create</button>
                 </div>
             </div>

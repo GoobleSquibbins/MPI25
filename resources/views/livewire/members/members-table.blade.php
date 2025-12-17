@@ -1,7 +1,7 @@
 <div class="w-full">
 
     <div class="mb-6">
-        <a href="{{ route('members.create') }}"
+        <a href="{{ route('members.create') }}" name="create"
             class="inline-block w-[350px] text-center
                bg-white hover:bg-blue-600
                border border-black
@@ -58,9 +58,9 @@
                         <td class="py-3">{{ $md->phone }}</td>
                         <td class="py-3">{{ $md->email }}</td>
                         <td class="py-3 flex flex-row items-center justify-center">
-                            <a href="{{ route('members.edit', $md->id) }}"
+                            <a href="{{ route('members.edit', $md->id) }}" name="edit{{$md->id}}"
                                 class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                            <a href="{{ route('members.delete', $md->id) }}"
+                            <a href="{{ route('members.delete', $md->id) }}" name="delete{{$md->id}}"
                                 class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
                         </td>
                     </tr>

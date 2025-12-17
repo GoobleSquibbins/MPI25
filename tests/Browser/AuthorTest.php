@@ -1,57 +1,57 @@
 <?php
 
 use Database\Seeders\DatabaseSeeder;
-use App\Models\Genre;
+use App\Models\Author;
 
 beforeEach(function () {
     $this->seed(DatabaseSeeder::class);
 });
 
-test('Tambah Genre', function () {  
+test('Tambah author', function () {  
     $this->visit('/')
         ->resize(1280, 720)
         ->assertSee('LIBRARY MANAGEMENT SYSTEM')
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
+        ->navigate('/authors')
         ->click('create')
-        ->type('name', 'Genre Baru')
-        ->click('submit')
-        ->assertSee('Genre Baru');
+        ->type('name', 'author Baru')
+        ->submit()
+        ->assertSee('author Baru');
 });
 
-test('Hapus Genre', function () {
-    $genre = Genre::first();  
+test('Hapus author', function () {
+    $author = Author::first();  
     $this->visit('/')
         ->resize(1280, 720)
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
-        ->assertSee($genre->name)
+        ->navigate('/authors')
+        ->assertSee($author->name)
         
         // Gunakan kutip ganda dan selector [name]
-        ->click("[name='delete{$genre->id}']") 
+        ->click("[name='delete{$author->id}']") 
         
         // Tambahkan asersi untuk memastikan data hilang
-        ->assertDontSee($genre->name);
+        ->assertDontSee($author->name);
 });
 
-test('Edit Genre', function () {
-    $genre = Genre::first();  
+test('Edit author', function () {
+    $author = Author::first();  
     $this->visit('/')
         ->resize(1280, 720)
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
-        ->assertSee($genre->name)
+        ->navigate('/authors')
+        ->assertSee($author->name)
         
         // Gunakan kutip ganda dan selector [name]
-        ->click("[name='edit{$genre->id}']") 
+        ->click("[name='edit{$author->id}']") 
         ->type('name', '')
-        ->type('name', 'Genre Baru')
+        ->type('name', 'author Baru')
         ->submit()
-        ->assertSee('Genre Baru');
+        ->assertSee('author Baru');
 });

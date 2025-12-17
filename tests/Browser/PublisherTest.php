@@ -1,57 +1,57 @@
 <?php
 
 use Database\Seeders\DatabaseSeeder;
-use App\Models\Genre;
+use App\Models\Publisher;
 
 beforeEach(function () {
     $this->seed(DatabaseSeeder::class);
 });
 
-test('Tambah Genre', function () {  
+test('Tambah Publisher', function () {  
     $this->visit('/')
         ->resize(1280, 720)
         ->assertSee('LIBRARY MANAGEMENT SYSTEM')
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
+        ->navigate('/publishers')
         ->click('create')
-        ->type('name', 'Genre Baru')
+        ->type('name', 'Publisher Baru')
         ->click('submit')
-        ->assertSee('Genre Baru');
+        ->assertSee('Publisher Baru');
 });
 
-test('Hapus Genre', function () {
-    $genre = Genre::first();  
+test('Hapus Publisher', function () {
+    $pub = Publisher::first();  
     $this->visit('/')
         ->resize(1280, 720)
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
-        ->assertSee($genre->name)
+        ->navigate('/publishers')
+        ->assertSee($pub->name)
         
         // Gunakan kutip ganda dan selector [name]
-        ->click("[name='delete{$genre->id}']") 
+        ->click("[name='delete{$pub->id}']") 
         
         // Tambahkan asersi untuk memastikan data hilang
-        ->assertDontSee($genre->name);
+        ->assertDontSee($pub->name);
 });
 
-test('Edit Genre', function () {
-    $genre = Genre::first();  
+test('Edit Publisher', function () {
+    $pub = Publisher::first();  
     $this->visit('/')
         ->resize(1280, 720)
         ->type('name', 'admin')
         ->type('password', 'qwe')
         ->submit()
-        ->navigate('/genres')
-        ->assertSee($genre->name)
+        ->navigate('/publishers')
+        ->assertSee($pub->name)
         
         // Gunakan kutip ganda dan selector [name]
-        ->click("[name='edit{$genre->id}']") 
+        ->click("[name='edit{$pub->id}']") 
         ->type('name', '')
-        ->type('name', 'Genre Baru')
+        ->type('name', 'Publisher Baru')
         ->submit()
-        ->assertSee('Genre Baru');
+        ->assertSee('Publisher Baru');
 });

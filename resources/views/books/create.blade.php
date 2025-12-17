@@ -85,8 +85,8 @@
                    class="px-4 py-2 bg-gray-600 mr-4 hover:bg-gray-500 transition cursor-pointer">
                     Cancel
                 </a>
-                <button
-                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 transition cursor-pointer" name="submit">
+                <button name="submit" type="submit"
+                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 transition cursor-pointer">
                     Create Book
                 </button>
             </div>
