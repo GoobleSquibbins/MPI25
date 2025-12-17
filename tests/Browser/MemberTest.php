@@ -21,6 +21,7 @@ test('Tambah Member', function () {
         ->type('phone', '1234567890')
         ->type('email', 'email@gmail.com')
         ->click('submit')
+        ->type('search', 'Member Baru')
         ->assertSee('Member Baru');
 });
 

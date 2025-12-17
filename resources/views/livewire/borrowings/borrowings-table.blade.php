@@ -110,10 +110,6 @@
                         </td>
 
                         <td class="py-3">
-                            <a href="{{ route('borrowings.edit', $bd->id) }}"
-                                class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                            <a href="{{ route('borrowings.delete', $bd->id) }}"
-                                class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
                             @if ($bd->status != 'returned')
                                 <a href="{{ route('borrowings.bookBack', $bd->id) }}"name="back{{$bd->id}}" class="ml-3 text-green-400 hover:text-green-300 transition">Return</a>
                             @endif

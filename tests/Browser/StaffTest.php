@@ -20,6 +20,7 @@ test('Tambah Staff', function () {
         ->type('password', 'pwd')
         ->type('password_conf', 'pwd')
         ->click('submit')
+        ->type('search', 'Staff Baru')
         ->assertSee('Staff Baru');
 });
 

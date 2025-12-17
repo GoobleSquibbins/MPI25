@@ -19,7 +19,7 @@
 
         <!-- Search Box -->
         <div class="relative">
-            <input wire:model.live.debounce.300ms="search" type="text" placeholder="SEARCH FOR MEMBER..."
+            <input wire:model.live.debounce.300ms="search" name="search" type="text" placeholder="SEARCH FOR MEMBER..."
                 class="px-4 py-2 w-[350px]
                        bg-black/40 border border-gray-700 text-gray-200
                        tracking-widest uppercase text-xs
