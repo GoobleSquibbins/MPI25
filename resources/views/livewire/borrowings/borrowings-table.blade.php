@@ -2,6 +2,7 @@
 
     <div class="mb-6">
         <a href="{{ route('borrowings.create') }}"
+            id="borrow-button"
             class="inline-block w-[350px] text-center
                bg-white hover:bg-blue-600
                border border-black

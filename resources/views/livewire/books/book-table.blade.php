@@ -1,6 +1,7 @@
 <div class="w-full">
     <div class="mb-6">
         <a href="{{ route('books.create') }}"
+            name="add-book"
             class="inline-block w-[350px]
                 text-center
                bg-white hover:bg-blue-600

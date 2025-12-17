@@ -1,22 +1,16 @@
 <div class="relative w-full">
 
-    {{-- Search Box --}}
-    <input type="text"
-        wire:model.live.debounce.300ms="query"
-        placeholder="Search books..."
-        class="w-full px-3 py-2 bg-black border border-gray-700 text-gray-200  focus:outline-none focus:border-white transition ease-in-out">
-
     {{-- Dropdown --}}
-    @if (!empty($results))
-        <ul class="absolute bg-white text-black w-full mt-1  shadow-lg z-10">
-            @foreach ($results as $book)
-                <li wire:click="selectBook({{ $book->id }})"
-                    class="px-3 py-2 hover:bg-gray-200 cursor-pointer">
-                    {{ $book->name }} — <span class="text-xs">({{ $book->available_copies }} left)</span>
-                </li>
-            @endforeach
-        </ul>
-    @endif
+    <select
+        wire:change="selectBook($event.target.value)"
+        name="book-select"
+        class="w-full px-3 py-2 bg-black border border-gray-700 text-gray-200 focus:outline-none focus:border-white transition ease-in-out"
+    >
+        <option value="">Select Book...</option>
+        @foreach(\App\Models\Book::where('available_copies', '>', 0)->get() as $book)
+            <option value="{{ $book->id }}">{{ $book->name }} ({{ $book->available_copies }} left)</option>
+        @endforeach
+    </select>
 
     {{-- Selected Books Chips --}}
     <div class="flex flex-wrap gap-2 mt-3">
