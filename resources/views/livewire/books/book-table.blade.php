@@ -41,6 +41,9 @@
         <table class="w-full border-collapse text-sm table-fixed">
             <thead class="border-b border-gray-700 text-gray-300 uppercase tracking-widest text-xs">
                 <tr>
+                    <th class="py-3 text-left cursor-pointer hover:text-blue-400" wire:click="sortBy('id')">
+                        ID
+                    </th>
                     <th class="py-3 text-left cursor-pointer hover:text-blue-400" wire:click="sortBy('name')">
                         Title
                     </th>
@@ -60,6 +63,11 @@
             <tbody class="divide-y divide-gray-800">
                 @foreach ($books as $book)
                     <tr class="hover:bg-white/5 transition duration-200">
+
+                        <!-- ID -->
+                        <td class="py-3 text-gray-400">
+                            {{ $book->id }}
+                        </td>
 
                         <!-- Title -->
                         <td class="py-3 pr-4 max-w-[180px] truncate text-gray-200">
@@ -88,9 +96,9 @@
 
                         <!-- Actions -->
                         <td class="py-3">
-                            <a href="{{ route('books.edit', $book->id) }}"
+                            <a href="{{ route('books.edit', $book->id) }}" name="edit{{$book->id}}"
                                 class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                            <a href="{{ route('books.delete', $book->id) }}"
+                            <a href="{{ route('books.delete', $book->id) }}" name="hapus{{ $book->id }}"
                                 class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
                         </td>
 

@@ -37,3 +37,35 @@ test('Nambah Buku', function () {
         ->waitForText($genre->name) 
         ->click($genre->name);
 });
+
+test('Hapus Buku', function () {
+    $book = Book::first();
+    
+    $this->visit('/')
+        ->resize(1280, 720)
+        ->type('name', 'admin')
+        ->type('password', 'qwe')
+        ->submit()
+        ->navigate('/books')
+        ->assertSee($book->id)
+        ->click("hapus{$book->id}")
+        ->assertDontSee($book->name);
+});
+
+test('Edit Buku', function () {
+    $book = Book::first();
+    
+    $this->visit('/')
+        ->resize(1280, 720)
+        ->type('name', 'admin')
+        ->type('password', 'qwe')
+        ->submit()
+        ->navigate('/books')
+        ->assertSee($book->id)
+        ->click("edit{$book->id}")
+        ->type('name', '')
+        ->type('name', 'Buku ABCD')
+        ->click('submit')
+        ->assertSee('Buku ABCD');
+});
+

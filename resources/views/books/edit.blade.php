@@ -98,7 +98,7 @@
                     Cancel
                 </a>
 
-                <button class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 transition cursor-pointer">
+                <button class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 transition cursor-pointer" name="submit">
                     Update
                 </button>
             </div>
