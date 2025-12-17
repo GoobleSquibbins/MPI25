@@ -2,7 +2,7 @@
 
 
     <div class="mb-6">
-        <a href="{{ route('genres.create') }}"
+        <a href="{{ route('genres.create') }}" name="create"
             class="inline-block w-[350px] text-center
                bg-white hover:bg-blue-600
                border border-black
@@ -54,9 +54,9 @@
                     <tr class="hover:bg-white/5 transition">
                         <td class="py-3">{{ $gd->name }}</td>
                         <td class="py-3 flex flex-row items-center justify-center">
-                            <a href="{{ route('genres.edit', $gd->id) }}"
+                            <a href="{{ route('genres.edit', $gd->id) }}" name='edit{{$gd->id}}'
                                 class="text-blue-400 hover:text-blue-300 transition">Edit</a>
-                            <a href="{{ route('genres.delete', $gd->id) }}"
+                            <a href="{{ route('genres.delete', $gd->id) }}" name='delete{{$gd->id}}'
                                 class="ml-3 text-red-400 hover:text-red-300 transition">Delete</a>
                         </td>
                     </tr>
